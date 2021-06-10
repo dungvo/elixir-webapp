@@ -1,0 +1,126 @@
+<div class="phx-hero">
+  <!-- Control the column width, and how they should appear on different devices -->
+
+  <!--
+  <div class="row">
+    <div class="col">
+      <button type="button" class="btn btn-outline-primary">Force Refresh</button>
+    </div>
+  </div>
+  -->
+
+  <div class="row">
+    <div class="col">
+      <h1>Apple Flagship Store </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class=" card card-stats">
+        <div class=" card-body">
+          <div class=" numbers">
+            <p class=" card-category"> Products</p>
+
+            <h3 class=" card-title">
+            <span class="badge badge-primary"><%= @stats.total %></span>
+            </h3>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class=" card card-stats">
+        <div class=" card-body">
+          <div class=" numbers">
+            <p class=" card-category"> Min Price </p>
+            <h3 class=" card-title">
+            <span class="badge badge-success">
+            <script>
+              var num = new Number(<%= @stats.min_price %>).toLocaleString("vn-Vi");
+              document.write(num);
+            </script>
+            </span>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class=" card card-stats">
+        <div class=" card-body">
+          <div class=" numbers">
+            <p class=" card-category"> Max Price </p>
+            <h3 class=" card-title">
+            <span class="badge badge-success">
+            <script>
+              var num = new Number(<%= @stats.max_price %>).toLocaleString("vn-Vi");
+              document.write(num);
+            </script>
+            </span>
+            </h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <div class="row">
+    <div class="col-md-3">
+      Phone: <span class="badge badge-primary"><%= @stats.number_phone %></span>
+    </div>
+    <div class="col-md-3">
+      Mac: <span class="badge badge-primary"><%= @stats.number_mac %></span>
+    </div>
+    <div class="col-md-3">
+      Watch: <span class="badge badge-primary"><%= @stats.number_watch %></span>
+    </div>
+    <div class="col-md-3">
+      Others: <span class="badge badge-primary"><%= @stats.number_others %></span>
+    </div>
+
+  </div>
+
+  <hr />
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th style="width: 30%">Product</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= for item <- @stats.products do %>
+          <tr>
+            <td>
+              <a href=" <%= item.url %> " target="_blank">
+              <figure>
+                <img src="<%= item.image %>" class="rounded-circle" alt="Cinque Terre" width="120" height="120">
+              </figure>
+              </a>
+            </td>
+            <td>
+            <a href=" <%= item.url %> " target="_blank">
+            <figcaption> <%= item.name %> </figcaption>
+            </a>
+            <br/>
+            <span class="badge badge-success">
+            <script>
+              var low = new Number(<%= item.low_price %>).toLocaleString("vn-Vi");
+              var high = new Number(<%= item.high_price %>).toLocaleString("vn-Vi");
+              <%= if item.low_price==item.high_price do %>
+                document.write(low);
+              <% else %>
+                document.write(low + " - " + high);
+              <% end %>
+            </script>
+            </span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
