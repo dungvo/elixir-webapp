@@ -1,5 +1,6 @@
 #!/bin/sh
 # Initial setup
+export SECRET_KEY_BASE=$(mix phx.gen.secret)
 mix deps.get --only prod
 MIX_ENV=prod mix compile
 
@@ -8,6 +9,6 @@ MIX_ENV=prod mix compile
 
 # Compile assets
 #npm run deploy --prefix ./assets
-mix phx.digest
+MIX_ENV=prod mix phx.digest
 
 MIX_ENV=prod mix release
